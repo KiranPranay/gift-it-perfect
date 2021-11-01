@@ -6,7 +6,7 @@ function Survey(survey) {
   // select the elements
   const progressbar = survey.querySelector(".progressbar");
   const surveyPanels = survey.querySelectorAll(".survey__panel");
-  const question1Radios = survey.querySelectorAll("[name='question_1']");
+  const question1Radios = survey.querySelectorAll("[name='recipient']");
   const question2Radios = survey.querySelectorAll("[name='question_2']");
   const question3CheckBoxes = survey.querySelectorAll("[name='question_3']");
   const question4Radios = survey.querySelectorAll("[name='question_4']");
@@ -36,7 +36,7 @@ function Survey(survey) {
     question5Name,
     question5Email,
     question5Country,
-    question5Age
+    question5Age,
   };
   let dontSubmit = false;
 
@@ -49,7 +49,7 @@ function Survey(survey) {
         .textContent.trim();
       formData[index] = {
         panelName: panelName,
-        question: question
+        question: question,
       };
     });
   }
@@ -68,7 +68,7 @@ function Survey(survey) {
     if (type === "checkbox") {
       if (formData[index].answer === undefined) {
         formData[index].answer = {
-          [name]: [value]
+          [name]: [value],
         };
         return;
       }
@@ -87,7 +87,7 @@ function Survey(survey) {
       const original = formData[index].answer;
       if (original === undefined) {
         formData[index].answer = {
-          [name]: value
+          [name]: value,
         };
         copy = { ...formData[index].answer };
       } else {
@@ -97,7 +97,7 @@ function Survey(survey) {
     }
 
     formData[index].answer = {
-      [name]: value
+      [name]: value,
     };
   }
 
@@ -134,7 +134,8 @@ function Survey(survey) {
     if (input.value.trim() === "") {
       showError(input, `${getName(input)} is required`);
     } else {
-      const pattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      const pattern =
+        /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       if (pattern.test(input.value.trim())) {
         noErrors(input);
       } else {
@@ -308,7 +309,7 @@ function Survey(survey) {
       question5Name,
       question5Email,
       question5Country,
-      question5Age
+      question5Age,
     } = inputs;
     question4Textarea.addEventListener("change", updateFormData);
     question5Name.addEventListener("change", updateFormData);
@@ -316,7 +317,7 @@ function Survey(survey) {
     question5Country.addEventListener("change", updateFormData);
     question5Age.addEventListener("change", updateFormData);
   }
-  nextButton.addEventListener("click", handleNextButton);
+  // nextButton.addEventListener("click", handleNextButton);
   prevButton.addEventListener("click", handleprevButton);
   addListenersTo(options);
   survey.addEventListener("submit", handleFormSubmit);
